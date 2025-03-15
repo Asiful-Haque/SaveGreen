@@ -53,7 +53,7 @@ export default function Dashboard() {
             <div className="mb-8 flex flex-row justify-center items-center h-screen space-x-6 px-6">
                 <div
                     onClick={() => {
-                        navigate("/community_help_post");
+                        navigate("/crisis");
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >

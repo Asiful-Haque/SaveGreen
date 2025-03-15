@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 
 const userRouter = require("./routes/UserRouter");
+const crisisRouter = require("./routes/CrisisRouter");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json()); // Parse JSON request body
 
 
 app.use("/api/users", userRouter);
+app.use("/api/crisis", crisisRouter);
 
 app.get("/", (req, res) => {
     res.send("API is running...");
