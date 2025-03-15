@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { findUserByEmail, createUser } = require("../models/UserModel");
+const { findUserByEmail, createUser, createDonation, getTotalDonation } = require("../models/UserModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -31,6 +31,28 @@ UserController.registerUser = async (req, res) => {
     }
 };
 
+UserController.registerDonation = async (req, res) => {
+    try {
+        const tokenFromLocalStorage = req.headers.authorization?.split(" ")[1];
+        if (!tokenFromLocalStorage) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
+        const userId = parseInt(decoded.userId, 10);
+
+        const { fullName, email, date, amount } = req.body;
+         const donation = await createDonation(fullName, email, date, amount, userId);
+        res.status(201).json({
+            message: "Donation registered successfully",
+        });
+    } catch (error) {
+        console.error("Error registering Donation:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
+
 UserController.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -47,6 +69,19 @@ UserController.loginUser = async (req, res) => {
         res.json({ message: "Login successful", token });
     } catch (error) {
         console.error("Error logging in:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
+UserController.getDonationTotal = async (req, res) => {
+    try {
+        const donation = await getTotalDonation();
+        if (!donation) {
+            return res.status(404).json({ message: "No Donation found" });
+        }
+        return res.status(200).json({ donation });
+    } catch (error) {
+        console.error("Error showing Donation:", error);
         res.status(500).json({ message: "Server error", error });
     }
 };

@@ -9,4 +9,10 @@ router.post("/register", UserController.registerUser);
 //login route
 router.post("/login", UserController.loginUser);
 
+//donation route
+router.post("/donate", UserController.registerDonation);
+
+//getting donation route
+router.get("/total_donation", UserController.getDonationTotal);
+
 module.exports = router;

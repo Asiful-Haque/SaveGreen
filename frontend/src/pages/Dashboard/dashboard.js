@@ -66,14 +66,14 @@ export default function Dashboard() {
                 </div>
                 <div
                     onClick={() => {
-                        navigate("/events");
+                        navigate("/donation");
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
                     <div className="flex items-center mb-4">
                         <div className="mx-auto flex flex-col items-center">
                             <i className="fas fa-home text-5xl text-green-500 mb-2"></i>
-                            <h3 className="text-xl font-bold text-gray-900">Events</h3>
+                            <h3 className="text-xl font-bold text-gray-900">Fund</h3>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,31 @@ export default function Dashboard() {
                 </div>
             </div>
 
-          
+            <div className="absolute flex-center bottom-0 w-[90%] bg-red-500 shadow-lg rounded-t-3xl py-12">
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <h3 className="text-4xl font-bold text-black">70+</h3>
+                        <p className="text-black font-semibold">Countries</p>
+                        <p className="text-black">
+                            More than 70 countries are connected with this platform.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="text-4xl font-bold text-black">15000+</h3>
+                        <p className="text-black font-semibold">Active Volunteers</p>
+                        <p className="text-black">
+                            Active 15k volunteers across the world are contributing.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="text-4xl font-bold text-black">6000+</h3>
+                        <p className="text-black font-semibold">Events</p>
+                        <p className="text-black">
+                            Events are successfully done by the active volunteers.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
