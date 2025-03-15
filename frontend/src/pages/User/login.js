@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     const closeModal = () => {
         setIsModalOpen(!isModalOpen);
-        navigate("/dashboard");
+        navigate("/user_dashboard");
     };
     const closeModal2 = () => {
         setIsModalOpen2(!isModalOpen2);
