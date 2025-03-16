@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const userRouter = require("./routes/UserRouter");
 const crisisRouter = require("./routes/CrisisRouter");
+const volunteerRouter = require("./routes/VolunteerRouter")
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(express.json()); // Parse JSON request body
 
 app.use("/api/users", userRouter);
 app.use("/api/crisis", crisisRouter);
+app.use("/api/volunteer", volunteerRouter);
+
 
 app.get("/", (req, res) => {
     res.send("API is running...");

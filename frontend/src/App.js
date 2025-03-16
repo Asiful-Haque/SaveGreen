@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard/dashboard";
 import Donation from "./pages/Donation/donation";
 import CrisisPage from "./pages/crisis/crisis";
 import AddCrisis from "./pages/crisis/addCrisis";
+import Volunteer from "./pages/volunteer/volunteer";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/donation" element={<Donation />} />
                 <Route path="/crisis" element={<CrisisPage />} />
                 <Route path="/add_crisis" element={<AddCrisis />} />
+                <Route path="/volunteer" element={<Volunteer />} />
             </Routes>
         </Router>
     );

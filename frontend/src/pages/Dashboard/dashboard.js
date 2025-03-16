@@ -79,7 +79,7 @@ export default function Dashboard() {
                 </div>
                 <div
                     onClick={() => {
-                        navigate("/teams");
+                        navigate("/volunteer");
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
