@@ -10,6 +10,7 @@ import CrisisPage from "./pages/crisis/crisis";
 import AddCrisis from "./pages/crisis/addCrisis";
 import Volunteer from "./pages/volunteer/volunteer";
 import AdminVolunteer from "./pages/Admin/adminVolunteer";
+import AdminCrisisPage from "./pages/Admin/adminCrisis";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/add_crisis" element={<AddCrisis />} />
                 <Route path="/volunteer" element={<Volunteer />} />
                 <Route path="/admin/volunteer" element={<AdminVolunteer />} />
+                <Route path="/admin/crisis" element={<AdminCrisisPage />} />
             </Routes>
         </Router>
     );

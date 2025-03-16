@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { getCrisis, createCrisis } = require("../models/CrisisModel");
+const { getCrisis, createCrisis, approveCrisisInDb } = require("../models/CrisisModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -30,6 +30,28 @@ CrisisController.getAllCrisis = async (req, res) => {
     } catch (error) {
         console.error("Error showing Crisis:", error);
         res.status(500).json({ message: "Server error", error });
+    }
+};
+
+CrisisController.approveCrisis = async (req, res) => {
+    const { crisis_id } = req.body;
+
+    if (!crisis_id) {
+        return res.status(400).json({ message: "crisis ID is required" });
+    }
+
+    try {
+        // Call model to approve the crisis
+        const result = await approveCrisisInDb(crisis_id);
+
+        if (result) {
+            return res.status(200).json({ message: "Crisis approved successfully" });
+        } else {
+            return res.status(404).json({ message: "Crisis not found" });
+        }
+    } catch (error) {
+        console.error("Error approving crisis:", error);
+        return res.status(500).json({ message: "Server error", error });
     }
 };
 

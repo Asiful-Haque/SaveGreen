@@ -54,7 +54,26 @@ export default function Dashboard() {
             <div className="mb-8 flex flex-row justify-center items-center h-screen space-x-6 px-6">
                 <div
                     onClick={() => {
-                        navigate("/crisis");
+                        const token = localStorage.getItem("token");
+
+                        if (token) {
+                            try {
+                                const decoded = jwtDecode(token); // Decode JWT token
+                                const { email, role } = decoded;
+                                console.log(email, role);
+                                //checking whether it is admin or user
+                                if (email === "admin@gmail.com" && role === "admin") {
+                                    navigate("/admin/crisis");
+                                } else {
+                                    navigate("/crisis");
+                                }
+                            } catch (error) {
+                                console.error("Invalid token:", error);
+                                navigate("/crisis");
+                            }
+                        } else {
+                            navigate("/crisis"); // Default route if no token is there
+                        }
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >

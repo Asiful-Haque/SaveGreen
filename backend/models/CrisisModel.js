@@ -10,12 +10,20 @@ async function createCrisis(crisisName, crisisDetails, severity, status) {
 }
 
 async function getCrisis() {
-    const result = await pool.query("select * from crisis where approval = true",);
+    const result = await pool.query("select * from crisis");
     return result.rows;
 }
 
+async function approveCrisisInDb(crisis_id) {
+    const result = await pool.query(
+        "UPDATE crisis SET approval = true WHERE crisis_id = $1 RETURNING *",
+        [crisis_id]
+    );
+    return result.rows[0]; // Return the updated crisis
+}
 
 module.exports = {
     createCrisis,
     getCrisis,
+    approveCrisisInDb,
 };

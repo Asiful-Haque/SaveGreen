@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CrisisCard from "../../components/CrisisCard";
 
-const CrisisPage = () => {
+
+const AdminCrisisPage = () => {
     const navigate = useNavigate();
 
     const [allCrisis, setAllCrisis] = useState([]);
@@ -10,8 +11,8 @@ const CrisisPage = () => {
     const [statusFilter, setStatusFilter] = useState("");
     const [filteredCrisis, setFilteredCrisis] = useState([]);
 
-
-    const makeFilter = () => { //This is filtering data through conditions
+    const makeFilter = () => {
+        //This is filtering data through conditions
         const filtered = allCrisis.filter((crisisEach) => {
             const matchesSeverity = severityFilter ? crisisEach.severity === severityFilter : true;
             const matchesStatus = statusFilter ? crisisEach.status === statusFilter : true;
@@ -34,11 +35,8 @@ const CrisisPage = () => {
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    console.log("Fetched crisis data1:", data);
-                    // Filter the crises to only include approved ------optimized------
-                    const approvedCrisis =
-                        data.crisis?.filter((crisis) => crisis.approval === true) || [];
-                    setAllCrisis(approvedCrisis);
+                    
+                    setAllCrisis(data.crisis || []);
                 } else {
                     console.error("Failed to fetch crisis");
                 }
@@ -118,4 +116,4 @@ const CrisisPage = () => {
     );
 };
 
-export default CrisisPage;
+export default AdminCrisisPage;

@@ -8,4 +8,7 @@ router.get("/get_crisis", CrisisController.getAllCrisis);
 //route for setting any crisis
 router.post("/set_crisis", CrisisController.addAnyCrisis);
 
+// Route for approving a crisis by admin
+router.put("/approve_crisis", CrisisController.approveCrisis);
+
 module.exports = router;
