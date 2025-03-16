@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+
 export default function Dashboard() {
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -79,7 +80,26 @@ export default function Dashboard() {
                 </div>
                 <div
                     onClick={() => {
-                        navigate("/volunteer");
+                        const token = localStorage.getItem("token");
+
+                        if (token) {
+                            try {
+                                const decoded = jwtDecode(token); // Decode JWT token
+                                const { email, role } = decoded;
+                                console.log(email,role);
+                                //checking whether it is admin or user
+                                if (email === "admin@gmail.com" && role === "admin") {
+                                    navigate("/admin/volunteer");
+                                } else {
+                                    navigate("/volunteer");
+                                }
+                            } catch (error) {
+                                console.error("Invalid token:", error);
+                                navigate("/volunteer"); 
+                            }
+                        } else {
+                            navigate("/volunteer"); // Default route if no token is there
+                        }
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >

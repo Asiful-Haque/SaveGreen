@@ -28,7 +28,7 @@ const LandingPage = () => {
                 </div>
             </div>
 
-            <div className="absolute inset-0 flex items-center justify-end text-white text-center px-20">
+            <div className="absolute inset-0 flex items-center justify-end text-white text-center px-40">
                 <div>
                     <h1 className="text-5xl font-bold leading-tight">
                         Betterment of the <br />

@@ -64,7 +64,13 @@ UserController.loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-        const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, { expiresIn: "1h" });
+        // Assign role based on email
+        const role = email === "admin@gmail.com" ? "admin" : "user";
+
+        // Generate JWT token with role
+        const token = jwt.sign({ userId: user.user_id, email: user.email, role }, JWT_SECRET, {
+            expiresIn: "1h",
+        });
 
         res.json({ message: "Login successful", token });
     } catch (error) {
