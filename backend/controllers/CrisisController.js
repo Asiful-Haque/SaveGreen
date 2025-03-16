@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { getCrisis, createCrisis, approveCrisisInDb } = require("../models/CrisisModel");
+const { getCrisis, createCrisis, approveCrisisInDb, assignVolunteersToCrisisInDb } = require("../models/CrisisModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -55,4 +55,29 @@ CrisisController.approveCrisis = async (req, res) => {
     }
 };
 
+
+CrisisController.assignVolunteers = async (req, res) => {
+    const { volunteer_ids, crisis_id } = req.body;
+    if (!volunteer_ids || volunteer_ids.length === 0) {
+        return res.status(400).json({ message: "Please select at least one volunteer." });
+    }
+    if (!crisis_id) {
+        return res.status(400).json({ message: "Crisis ID is required." });
+    }
+    try {
+        const assignedVolunteers = await assignVolunteersToCrisisInDb(volunteer_ids, crisis_id);
+
+        if (assignedVolunteers.length > 0) {
+            return res.status(200).json({
+                message: "Volunteers successfully assigned to the crisis.",
+                assignedVolunteers,
+            });
+        } else {
+            return res.status(404).json({ message: "Failed to assign volunteers to the crisis." });
+        }
+    } catch (error) {
+        console.error("Error assigning volunteers:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
 module.exports = CrisisController;

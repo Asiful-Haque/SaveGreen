@@ -22,8 +22,21 @@ async function approveCrisisInDb(crisis_id) {
     return result.rows[0]; // Return the updated crisis
 }
 
+async function assignVolunteersToCrisisInDb(volunteerIds, crisisId) {
+        const result = await pool.query(
+            `INSERT INTO assigned_crisis (crisis_id, volunteer_id) 
+             SELECT $1, unnest($2::int[]) 
+             ON CONFLICT (crisis_id, volunteer_id) DO NOTHING
+             RETURNING crisis_id, volunteer_id`,
+            [crisisId, volunteerIds]
+        );
+        return result.rows;
+}
+
+
 module.exports = {
     createCrisis,
     getCrisis,
     approveCrisisInDb,
+    assignVolunteersToCrisisInDb,
 };

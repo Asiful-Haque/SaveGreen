@@ -11,6 +11,7 @@ import AddCrisis from "./pages/crisis/addCrisis";
 import Volunteer from "./pages/volunteer/volunteer";
 import AdminVolunteer from "./pages/Admin/adminVolunteer";
 import AdminCrisisPage from "./pages/Admin/adminCrisis";
+import CrisisAssign from "./pages/Admin/adminCrisisAssign";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/volunteer" element={<Volunteer />} />
                 <Route path="/admin/volunteer" element={<AdminVolunteer />} />
                 <Route path="/admin/crisis" element={<AdminCrisisPage />} />
+                <Route path="/admin/crisis_assign" element={<CrisisAssign />} />
             </Routes>
         </Router>
     );

@@ -1,7 +1,9 @@
 import React from "react";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const CrisisCard = ({ crisis }) => {
+    const navigate = useNavigate();
     async function approveAndReload() {
         try {
             // this approves the volunteers by admin
@@ -62,7 +64,14 @@ const CrisisCard = ({ crisis }) => {
                     </button>
                 ) : (
                     //if approved then add assign button
-                    <button className="bg-lime-600 text-white py-1 px-4 rounded-md font-semibold ">
+                    <button
+                        onClick={() =>
+                            navigate("/admin/crisis_assign", {
+                                state: { crisis_id: crisis.crisis_id },
+                            })
+                        }
+                        className="bg-lime-600 text-white py-1 px-4 rounded-md font-semibold "
+                    >
                         Assign
                     </button>
                 )
