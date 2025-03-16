@@ -1,14 +1,10 @@
 const pool = require("../config/db");
 
 async function getVolunteers() {
-    const result = await pool.query("select * from volunteer where approved = true");
-    return result.rows;
-}
-
-async function getAppUnappVolunteers() {
     const result = await pool.query("select * from volunteer");
     return result.rows;
 }
+
 
 async function approveVolunteerInDb(volunteer_id) {
     
@@ -21,6 +17,5 @@ async function approveVolunteerInDb(volunteer_id) {
 
 module.exports = {
     getVolunteers,
-    getAppUnappVolunteers,
     approveVolunteerInDb,
 };

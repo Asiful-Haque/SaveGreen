@@ -10,7 +10,7 @@ const AdminVolunteer = () => {
         //This api fetches the crisis data from database
         const fetchVolunteer = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/volunteer/get_app_unapp_volunteers", {
+                const res = await fetch("http://localhost:5000/api/volunteer/get_volunteers", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

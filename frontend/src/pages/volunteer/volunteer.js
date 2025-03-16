@@ -18,8 +18,12 @@ const Volunteer = () => {
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    console.log("Fetched volunteer data:", data);
-                    setVolunteers(data.volunteers || []);
+
+                    // Filter the volunteers to only include approved ------optimized------
+                    const approvedVolunteer =
+                        data.volunteers?.filter((volunteer) => volunteer.approved === true) || [];
+                    setVolunteers(approvedVolunteer);
+
                 } else {
                     console.error("Failed to fetch volunteer");
                 }

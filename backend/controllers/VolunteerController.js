@@ -5,9 +5,9 @@ const { getVolunteers, getAppUnappVolunteers, approveVolunteerInDb } = require("
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const VoluneerController = {};
+const VolunteerController = {};
 
-VoluneerController.getAllVolunteers = async (req, res) => {
+VolunteerController.getAllVolunteers = async (req, res) => {
     try {
         const volunteers = await getVolunteers();
         if (!volunteers) {
@@ -21,21 +21,8 @@ VoluneerController.getAllVolunteers = async (req, res) => {
     }
 };
 
-VoluneerController.getAllAppUnappVolunteers = async (req, res) => {
-    try {
-        const volunteers = await getAppUnappVolunteers();
-        if (!volunteers) {
-            return res.status(404).json({ message: "No volunteers found" });
-        }
-        console.log(volunteers);
-        return res.status(200).json({ volunteers });
-    } catch (error) {
-        console.error("Error showing volunteers:", error);
-        res.status(500).json({ message: "Server error", error });
-    }
-};
 
-VoluneerController.approveVolunteer = async (req, res) => {
+VolunteerController.approveVolunteer = async (req, res) => {
     const { volunteer_id } = req.body; 
 
     if (!volunteer_id) {
@@ -57,4 +44,4 @@ VoluneerController.approveVolunteer = async (req, res) => {
     }
 };
 
-module.exports = VoluneerController;
+module.exports = VolunteerController;

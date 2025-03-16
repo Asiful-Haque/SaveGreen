@@ -1,14 +1,12 @@
 const express = require("express");
-const VoluneerController = require("../controllers/VolunteerController");
+const VolunteerController = require("../controllers/VolunteerController");
 
 
 const router = express.Router();
 
 //route for getting all the volunteers
-router.get("/get_volunteers", VoluneerController.getAllVolunteers);
-//route for getting all the volunteers (approved + unapproved)
-router.get("/get_app_unapp_volunteers", VoluneerController.getAllAppUnappVolunteers);
+router.get("/get_volunteers", VolunteerController.getAllVolunteers);
 
 // Route for approving a volunteer
-router.put("/approve_volunteer", VoluneerController.approveVolunteer);
+router.put("/approve_volunteer", VolunteerController.approveVolunteer);
 module.exports = router;
