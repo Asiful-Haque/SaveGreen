@@ -72,7 +72,7 @@ export default function Dashboard() {
                 >
                     <div className="flex items-center mb-4">
                         <div className="mx-auto flex flex-col items-center">
-                            <i className="fas fa-home text-5xl text-green-500 mb-2"></i>
+                            <i className="fas fa-money-bill-alt text-5xl text-green-500 mb-2"></i>
                             <h3 className="text-xl font-bold text-gray-900">Fund</h3>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="absolute flex-center bottom-0 w-[90%] bg-red-500 shadow-lg rounded-t-3xl py-12">
+            <div className="absolute flex-center bottom-0 w-[90%] bg-green-700 shadow-lg rounded-t-3xl py-12">
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div>
                         <h3 className="text-4xl font-bold text-black">70+</h3>

@@ -47,8 +47,8 @@ const Volunteer = () => {
                     </div>
 
                     <div className="z-40 p-6 space-y-6">
-                        <h2 className="text-center text-3xl font-bold text-black mb-4">
-                            Recent Crises
+                        <h2 className="text-center text-4xl font-bold text-white mb-4">
+                            Volunteers
                         </h2>
                         <div className="flex flex-wrap gap-4 justify-center">
                             {volunteers.map((volunteer) => (

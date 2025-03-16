@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DonationChart from "../../components/DonationChart";
 
 export default function Donation() {
     const [fullName, setFullName] = useState("");
@@ -83,8 +84,8 @@ export default function Donation() {
                 style={{ backgroundImage: "url('/donation_page.jpg')" }}
             >
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-                <div className="w-[50%]">
-                    <div className="relative w-[65%] h-auto p-8 rounded-lg shadow-2xl backdrop-blur-md bg-white/10 border border-red-800">
+                <div className="w-[50%] pt-20">
+                    <div className="mb-6 relative w-[65%] h-auto p-8 rounded-lg shadow-2xl backdrop-blur-md bg-white/10 border border-red-800">
                         <h3 className="text-green-500 text-3xl font-semibold text-center">
                             Total Donation
                         </h3>
@@ -92,12 +93,15 @@ export default function Donation() {
                             {totalDonation}
                         </h3>
                     </div>
+                    {/* for showing the chart  */}
+                    <DonationChart /> 
                 </div>
+
                 <div className="relative w-[45%] h-auto p-8 rounded-lg shadow-2xl backdrop-blur-md bg-white/10 border border-red-800">
                     <h3 className="text-green-500 text-3xl font-semibold text-center">
                         Donate For Disaster
                     </h3>
-
+                    {/* form for donation  */}
                     <form onSubmit={handleSubmit} className="mt-6">
                         <>
                             <label className="text-green-500 font-medium">Full Name</label>

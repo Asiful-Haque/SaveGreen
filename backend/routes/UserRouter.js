@@ -15,4 +15,7 @@ router.post("/donate", UserController.registerDonation);
 //getting donation route
 router.get("/total_donation", UserController.getDonationTotal);
 
+//getting total donation by continuous date
+router.get("/total_donation_date_wise", UserController.getDonationTotalByDate);
+
 module.exports = router;

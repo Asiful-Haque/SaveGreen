@@ -28,10 +28,15 @@ async function getTotalDonation() {
     return result.rows[0].total_donation;
 }
 
+async function getDateWiseDonation(date) {
+    const result = await pool.query(`select SUM(amount) as total_donation_date from donation where date= $1`,[date]);
+    return result.rows[0].total_donation_date;
+}
 
 module.exports = {
     createUser,
     findUserByEmail,
     createDonation,
     getTotalDonation,
+    getDateWiseDonation,
 };

@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { findUserByEmail, createUser, createDonation, getTotalDonation } = require("../models/UserModel");
+const { findUserByEmail, createUser, createDonation, getTotalDonation, getDateWiseDonation } = require("../models/UserModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -83,6 +83,21 @@ UserController.getDonationTotal = async (req, res) => {
     } catch (error) {
         console.error("Error showing Donation:", error);
         res.status(500).json({ message: "Server error", error });
+    }
+};
+
+UserController.getDonationTotalByDate = async (req, res) => {
+    const date = new Date().toISOString().split("T")[0];
+    try {
+        const totalDonation = await getDateWiseDonation(date);
+
+        // Ensure response is in array format to match frontend expectation
+        const responseData = [{ date, total_donation: totalDonation || 0 }];
+
+        res.json(responseData);
+    } catch (error) {
+        console.error("Error fetching donation data:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 };
 
