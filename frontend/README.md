@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+# 🤝 SaveGreen 🤝
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Web Application is designed to provide an efficient platform for managing disaster relief efforts. The project aims to streamline volunteer coordination, crisis reporting, donation collection, and inventory management to enhance disaster response. The system includes roles for Admins and Volunteers, along with public access for donation and crisis reporting.
 
-## Available Scripts
+![App Screenshot](https://res.cloudinary.com/drpasy4d2/image/upload/v1742202643/saveGreen1_uwe4zs.png)
 
-In the project directory, you can run:
+## 🛠️ Tech Stack
 
-### `npm start`
+**🌍 Front-end:** React.js, TailwindCSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**🖥️ Back-end:** Node.js, Express.js
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**🛢️ Database:** PostgreSQL
 
-### `npm test`
+**🔑 Authentication:** JWT (JSON Web Token)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🌟 Features
 
-### `npm run build`
+1️⃣ User Registration & Log In
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   Secure user authentication and authorization with email and password (JWT).
+-   User profiles containing basic info, skills, and supported causes.
+-   users here are admin,and normal user.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2️⃣ Dashboard
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   Customized dashboard for both users and admin.
+-   For Admin : Crisis, Fund, Volunteer, Task part, Report.
+-   For User: Crisis, Fund, Volunteer.
 
-### `npm run eject`
+3️⃣ Donation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-   Users and admin both can see the donation form to donate.
+-   Both can track the total amount of donation.
+-   Daily donation chart is shown in this part.
+-   Better UI like other Dashboard platforms.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4️⃣ Crisis
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-   Users can see the crises (when admin approves).
+-   Admin can approve the crises.
+-   Admin can assign crisis to volunteers.
+-   Both can filter the crises.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5️⃣ Volunteer
 
-## Learn More
+-   Users can see Volunteers (When admin approves).
+-   Admin can verify and approve volunteers.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+6️⃣ Task
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   Only admin can access this.
+-   Admin can assign task to the volunteers.
 
-### Code Splitting
+7️⃣ Report
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-   Admin can access this.
+-   Admin can generate report excel file daily basis.
 
-### Analyzing the Bundle Size
+## 🔗 API Reference
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### 👤 User 🏷️
 
-### Making a Progressive Web App
+```http
+POST /api/users/register - Register a new user
+POST /api/users/login - Authenticate user and return a token
+POST /api/users/donate - Register the donation information.
+GET /api/users/total_donation - Get the total amount of donation
+GET /api/users/total_donation_date_wise - Date wise donation amount
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### 🦸 Volunteer 🤝
 
-### Advanced Configuration
+```http
+GET /api/volunteer/get_volunteer - Fetch all volunteers to show in UI
+PUT /api/volunteer/approve_volunteer - volunteer will be approved after validation by admin
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### 📋 Task 📌
 
-### Deployment
+```http
+GET /api/task/get_tasks - Fetch all tasks to show in UI
+POST /api/task/assign_tasks - volunteer will be assigned on the tasks by admin
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### 🚨 Crisis ⚠️
 
-### `npm run build` fails to minify
+```http
+GET /api/crisis/get_crisis - Fetch all crisis to show in UI
+POST /api/crisis/set_crisis - Anyone can add crisis to get help
+PUT /api/crisis/approve_crisis - Added crisis will be rechecked by admin and approved or rejected
+POST /api/crisis/assign_volunteers - Admin can assign volunteers to specific crises
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### 📊 Report 📑
+
+```http
+GET /api/report/get_report - Admin will generate datily donation update on excel files
+```
+
+## Database Schema
+
+![App Screenshot](https://res.cloudinary.com/drpasy4d2/image/upload/v1742202480/SaveGreen.drawio_qy3yl0.png)
+
+## 🏎️ Run Locally
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm start
+```
+
+## Feedback
+
+If you have any feedback, please reach out to us at asiful35-2961@diu.edu.bd
