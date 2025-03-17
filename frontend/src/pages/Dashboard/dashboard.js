@@ -10,6 +10,20 @@ export default function Dashboard() {
         navigate("/signup");
     };
 
+    const token = localStorage.getItem("token");
+    let isAdmin = false;
+
+    if (token) {
+        try {
+            const decoded = jwtDecode(token);
+            if (decoded.email === "admin@gmail.com" && decoded.role === "admin") {
+                isAdmin = true;
+            }
+        } catch (error) {
+            console.error("Invalid Token", error);
+        }
+    }
+
     return (
         <div
             className="relative bg-cover bg-center h-auto flex justify-center"
@@ -54,15 +68,9 @@ export default function Dashboard() {
             <div className="mb-8 flex flex-row justify-center items-center h-screen space-x-6 px-6">
                 <div
                     onClick={() => {
-                        const token = localStorage.getItem("token");
-
-                        if (token) {
                             try {
-                                const decoded = jwtDecode(token); // Decode JWT token
-                                const { email, role } = decoded;
-                                console.log(email, role);
-                                //checking whether it is admin or user
-                                if (email === "admin@gmail.com" && role === "admin") {
+                                
+                                if (isAdmin) {
                                     navigate("/admin/crisis");
                                 } else {
                                     navigate("/crisis");
@@ -71,9 +79,6 @@ export default function Dashboard() {
                                 console.error("Invalid token:", error);
                                 navigate("/crisis");
                             }
-                        } else {
-                            navigate("/crisis"); // Default route if no token is there
-                        }
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
@@ -99,15 +104,8 @@ export default function Dashboard() {
                 </div>
                 <div
                     onClick={() => {
-                        const token = localStorage.getItem("token");
-
-                        if (token) {
                             try {
-                                const decoded = jwtDecode(token); // Decode JWT token
-                                const { email, role } = decoded;
-                                console.log(email,role);
-                                //checking whether it is admin or user
-                                if (email === "admin@gmail.com" && role === "admin") {
+                                if (isAdmin) {
                                     navigate("/admin/volunteer");
                                 } else {
                                     navigate("/volunteer");
@@ -116,10 +114,8 @@ export default function Dashboard() {
                                 console.error("Invalid token:", error);
                                 navigate("/volunteer"); 
                             }
-                        } else {
-                            navigate("/volunteer"); // Default route if no token is there
-                        }
-                    }}
+                        } 
+                    }
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
                     <div className="flex items-center mb-4">
@@ -129,19 +125,22 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div
+                {isAdmin && ( //Only in admin this part will be shown
+                    <div
                     onClick={() => {
-                        navigate("/leaderboard_user");
+                        navigate("/admin/task_list");
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
                     <div className="flex items-center mb-4">
                         <div className="mx-auto flex flex-col items-center">
                             <i className="fas fa-rocket text-5xl text-green-500 mb-2"></i>
-                            <h3 className="text-xl font-bold text-gray-900">Leaderboard</h3>
+                            <h3 className="text-xl font-bold text-gray-900">Tasks</h3>
                         </div>
                     </div>
                 </div>
+                )}
+                
             </div>
 
             <div className="absolute flex-center bottom-0 w-[90%] bg-green-700 shadow-lg rounded-t-3xl py-12">

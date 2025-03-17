@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const VolunteerAssign = ({ crisis_id }) => {
+const VolunteerAssign = ({ task_id=null, crisis_id=null }) => {
     const [volunteers, setVolunteers] = useState([]);
     const [selectedVolunteers, setSelectedVolunteers] = useState([]);
 
@@ -40,28 +40,59 @@ const VolunteerAssign = ({ crisis_id }) => {
     // Handle the assign action
     const handleAssignAll = async () => {
         if (selectedVolunteers.length > 0) {
-            try {
-                const res = await fetch("http://localhost:5000/api/crisis/assign_volunteers", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        volunteer_ids: selectedVolunteers,
-                        crisis_id: crisis_id,
-                    }),
-                });
-                if (res.ok) {
-                    alert("Assigned Successfully");
-                    console.log("Volunteers successfully assigned!");
-                    setSelectedVolunteers([]);
-                } else {
-                    console.error("Failed to assign volunteers");
-                    alert("There is a problem. Maybe it's already added.");
-                }
-            } catch (error) {
-                console.error("Error assigning volunteers:", error);
+            if (crisis_id) {
+                try {
+                    // Only add crisis_id if it exists
+                    const res = await fetch("http://localhost:5000/api/crisis/assign_volunteers", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            volunteer_ids: selectedVolunteers,
+                            crisis_id: crisis_id,
+                        }),
+                    });
+                    if (res.ok) {
+                        alert("Assigned Successfully");
+                        console.log("Volunteers successfully assigned!");
+                        setSelectedVolunteers([]);
+                    } else {
+                        console.error("Failed to assign volunteers");
+                        alert("It's already added.");
+                    }
+                } catch (error) {
+                    console.error("Error assigning volunteers:", error);
+                } 
+            } else if (task_id) {
+                try {
+                    // Only add task_id if it exists
+                    const res = await fetch("http://localhost:5000/api/task/assign_tasks", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            volunteer_ids: selectedVolunteers,
+                            task_id: task_id,
+                        }),
+                    });
+                    if (res.ok) {
+                        alert("Assigned Successfully");
+                        console.log("Volunteers successfully assigned!");
+                        setSelectedVolunteers([]);
+                    } else {
+                        console.error("Failed to assign volunteers");
+                        alert("It's already added.");
+                    }
+                } catch (error) {
+                    console.error("Error assigning volunteers:", error);
+                } 
+            } else {
+                alert("No crisis or task ID provided.");
+                return;
             }
+            
         } else {
             alert("Please select at least one volunteer to assign.");
         }

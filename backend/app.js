@@ -5,6 +5,7 @@ const cors = require("cors");
 const userRouter = require("./routes/UserRouter");
 const crisisRouter = require("./routes/CrisisRouter");
 const volunteerRouter = require("./routes/VolunteerRouter")
+const taskRouter = require("./routes/TaskRouter");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.json()); // Parse JSON request body
 app.use("/api/users", userRouter);
 app.use("/api/crisis", crisisRouter);
 app.use("/api/volunteer", volunteerRouter);
+app.use("/api/task", taskRouter);
 
 
 app.get("/", (req, res) => {
