@@ -103,18 +103,26 @@ GET /api/report/get_report - Admin will generate datily donation update on excel
 
 ## 🏎️ Run Locally
 
-
-
-Install dependencies
+Install my-project with npm 🚀
 
 ```bash
+  git clone [https://github.com/Asiful-Haque/SaveGreen.git]
+  cd SaveGreen
+```
+```bash
+  Install dependencies:
   npm install
 ```
-
-Start the server
-
 ```bash
-  npm start
+  Set up environment variables:
+  Create a .env file and add necessary credentials:
+  DATABASE_URL=your_database_url
+  JWT_SECRET=your_secret_key
+```
+```bash
+  Start the server:
+  frontend: npm start
+  backend: node app.js
 ```
 
 ## Feedback
