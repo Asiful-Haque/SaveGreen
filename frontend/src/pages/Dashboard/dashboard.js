@@ -37,17 +37,25 @@ export default function Dashboard() {
 
                 <div className="flex space-x-6 items-center">
                     <div className="text-white hover:text-lime-500 transition-transform duration-200 hover:scale-110">
-                        <a href="/events">Donate</a>
+                        <a href="/donation">Donate</a>
                     </div>
                     <div className="text-white hover:text-lime-500  transition-transform duration-200 hover:scale-110">
                         <a href="/www.linkedin.com">Linkedin</a>
                     </div>
+                    {isAdmin && (
+                        <div className="text-white hover:text-lime-500  transition-transform duration-200 hover:scale-110">
+                            <a href="/admin/report">Get Report</a>
+                        </div>
+                    )}
                     <div className="text-white hover:text-lime-500  transition-transform duration-200 hover:scale-110">
                         <a href="/www.github.com">Github</a>
                     </div>
-                    <div className="text-white hover:text-lime-500  transition-transform duration-200 hover:scale-110">
-                        <a href="/profile">Profile</a>
-                    </div>
+                    {!isAdmin && (
+                        <div className="text-white hover:text-lime-500  transition-transform duration-200 hover:scale-110">
+                            <a href="/account">Profile</a>
+                        </div>
+                    )}
+
                     <button
                         onClick={handleLogout}
                         className="text-white hover:text-lime-500  transition-transform duration-200 hover:scale-110"
@@ -55,7 +63,11 @@ export default function Dashboard() {
                         <Link to="/signup">Logout</Link>
                     </button>
 
-                    <button onClick={() => navigate("/profile")}>
+                    <button onClick={() => {
+                        if (!isAdmin) {
+                            navigate("/account");
+                        }
+                    }}>
                         <img
                             src="https://i.pravatar.cc/50"
                             alt="User Avatar"
@@ -68,17 +80,16 @@ export default function Dashboard() {
             <div className="mb-8 flex flex-row justify-center items-center h-screen space-x-6 px-6">
                 <div
                     onClick={() => {
-                            try {
-                                
-                                if (isAdmin) {
-                                    navigate("/admin/crisis");
-                                } else {
-                                    navigate("/crisis");
-                                }
-                            } catch (error) {
-                                console.error("Invalid token:", error);
+                        try {
+                            if (isAdmin) {
+                                navigate("/admin/crisis");
+                            } else {
                                 navigate("/crisis");
                             }
+                        } catch (error) {
+                            console.error("Invalid token:", error);
+                            navigate("/crisis");
+                        }
                     }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
@@ -104,18 +115,17 @@ export default function Dashboard() {
                 </div>
                 <div
                     onClick={() => {
-                            try {
-                                if (isAdmin) {
-                                    navigate("/admin/volunteer");
-                                } else {
-                                    navigate("/volunteer");
-                                }
-                            } catch (error) {
-                                console.error("Invalid token:", error);
-                                navigate("/volunteer"); 
+                        try {
+                            if (isAdmin) {
+                                navigate("/admin/volunteer");
+                            } else {
+                                navigate("/volunteer");
                             }
-                        } 
-                    }
+                        } catch (error) {
+                            console.error("Invalid token:", error);
+                            navigate("/volunteer");
+                        }
+                    }}
                     className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
                 >
                     <div className="flex items-center mb-4">
@@ -127,20 +137,19 @@ export default function Dashboard() {
                 </div>
                 {isAdmin && ( //Only in admin this part will be shown
                     <div
-                    onClick={() => {
-                        navigate("/admin/task_list");
-                    }}
-                    className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
-                >
-                    <div className="flex items-center mb-4">
-                        <div className="mx-auto flex flex-col items-center">
-                            <i className="fas fa-rocket text-5xl text-green-500 mb-2"></i>
-                            <h3 className="text-xl font-bold text-gray-900">Tasks</h3>
+                        onClick={() => {
+                            navigate("/admin/task_list");
+                        }}
+                        className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
+                    >
+                        <div className="flex items-center mb-4">
+                            <div className="mx-auto flex flex-col items-center">
+                                <i className="fas fa-rocket text-5xl text-green-500 mb-2"></i>
+                                <h3 className="text-xl font-bold text-gray-900">Tasks</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
                 )}
-                
             </div>
 
             <div className="absolute flex-center bottom-0 w-[90%] bg-green-700 shadow-lg rounded-t-3xl py-12">

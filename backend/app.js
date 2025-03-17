@@ -6,6 +6,7 @@ const userRouter = require("./routes/UserRouter");
 const crisisRouter = require("./routes/CrisisRouter");
 const volunteerRouter = require("./routes/VolunteerRouter")
 const taskRouter = require("./routes/TaskRouter");
+const reportRouter = require("./routes/ReportRouter");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/users", userRouter);
 app.use("/api/crisis", crisisRouter);
 app.use("/api/volunteer", volunteerRouter);
 app.use("/api/task", taskRouter);
+app.use("/api/report", reportRouter);
 
 
 app.get("/", (req, res) => {

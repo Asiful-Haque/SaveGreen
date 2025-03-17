@@ -14,6 +14,7 @@ import AdminCrisisPage from "./pages/Admin/adminCrisis";
 import CrisisAssign from "./pages/Admin/adminCrisisAssign";
 import TaskList from "./pages/Admin/adminTask";
 import TaskAssign from "./pages/Admin/adminTaskAssign";
+import DownloadReport from "./pages/Admin/adminReport";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/admin/crisis_assign" element={<CrisisAssign />} />
                 <Route path="/admin/task_list" element={<TaskList />} />
                 <Route path="/admin/task_assign" element={<TaskAssign />} />
+                <Route path="/admin/report" element={<DownloadReport />} />
             </Routes>
         </Router>
     );
