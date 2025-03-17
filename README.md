@@ -120,3 +120,9 @@ Start the server
 ## Feedback
 
 If you have any feedback, please reach out to us at asiful35-2961@diu.edu.bd
+
+
+## Future enhancement
+- Inventory management
+- Profile updataion
+
